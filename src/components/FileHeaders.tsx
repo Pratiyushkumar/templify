@@ -4,16 +4,16 @@ interface FileHeadersProps {
 
 const FileHeaders: React.FC<FileHeadersProps> = ({ headers }) => {
     return (
-        <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">File Headers</h3>
-            <div className="flex flex-wrap gap-2">
-                {headers.map((header) => (
-                    <span key={header} className="bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                        {header}
-                    </span>
-                ))}
-            </div>
+        <div className="flex flex-wrap gap-4 p-4">
+      {headers.map((item, index) => (
+        <div
+          key={index}
+          className="flex items-center justify-center bg-gray-400 text-white p-4 rounded shadow-md w-24 h-10"
+        >
+          {item}
         </div>
+      ))}
+    </div>
     );
 };
 

@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef } from 'react';
 import { Input } from '../components/ui/input';
+import { FileUpload } from './ui/file-upload';
 
 interface FileUploaderProps {
     onFileSelected: (file: File) => void;
@@ -29,14 +30,8 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
     };
 
     return (
-        <div className="grid w-full max-w-sm items-center gap-4">
-            <Input
-                ref={inputRef}
-                type="file"
-                accept=".xlsx,.xls,.csv"
-                className="mb-4"
-                onChange={handleFileChange}
-            />
+        <div className='w-1/2 mx-auto border border-dashed border-gray-300'>
+            <FileUpload onChange={handleFileChange} />
         </div>
     );
 };

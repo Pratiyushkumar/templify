@@ -24,7 +24,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   };
 
   return (
-    <div className='mb-4'>
+    <div className='mb-4 space-y-3'>
       <Label>Enter Custom Template</Label>
       <Textarea
         value={customTemplate}

@@ -7,6 +7,7 @@ import FileHeaders from '../components/FileHeaders';
 import ProcessedData from '../components/ProcessedData';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import Header from '../components/Header';
 
 
 pdfMake.vfs = pdfFonts.vfs;
@@ -87,10 +88,11 @@ const Home = () => {
       pdfMake.createPdf(docDefinition).download('processed_data.pdf');
     }
   };
-
+  console.log(headers);
   return (
-    <section>
-      <h1>File Processor</h1>
+    <section className='w-3/4 mx-auto space-y-5'>
+      
+      <Header />  
 
       <FileUploader onFileSelected={handleFileSelected} />
 
