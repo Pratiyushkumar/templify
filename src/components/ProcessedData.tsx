@@ -2,7 +2,7 @@ import { Button } from './ui/button';
 
 interface ProcessedDataProps {
     data: string[];
-    downloadProcessedData: () => void;
+    downloadProcessedData: (format:'txt'|'pdf') => void;
 }
 
 const ProcessedData: React.FC<ProcessedDataProps> = ({ data, downloadProcessedData }) => {
@@ -16,9 +16,14 @@ const ProcessedData: React.FC<ProcessedDataProps> = ({ data, downloadProcessedDa
                     </div>
                 ))}
             </div>
-            <Button onClick={downloadProcessedData} className="mt-2">
-                Download Processed Data
+            <div className="flex gap-2">
+            <Button onClick={() => downloadProcessedData('txt')}>
+            Download as TXT
             </Button>
+            <Button onClick={() => downloadProcessedData('pdf')}>
+            Download as PDF
+            </Button>
+        </div>
         </div>
     );
 };
