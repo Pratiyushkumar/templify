@@ -1,41 +1,39 @@
 import { ChangeEvent, useState } from 'react';
 import { Label } from '../components/ui/label';
 import { Button } from '../components/ui/button';
+import { Textarea } from './ui/textarea';
 
 interface TemplateSelectorProps {
-    templates: { [key: string]: string };
-    onTemplateSelected: (template: string) => void;
+  onCustomTemplateSelected: (customTemplate: string) => void;
 }
 
-const TemplateSelector: React.FC<TemplateSelectorProps> = ({ templates, onTemplateSelected }) => {
-    const [template, setTemplate] = useState<string>('');
+const TemplateSelector: React.FC<TemplateSelectorProps> = ({
+  onCustomTemplateSelected,
+}) => {
+  const [customTemplate, setCustomTemplate] = useState<string>('');
 
-    const handleTemplateChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selectedTemplate = event.target.value;
-        setTemplate(selectedTemplate);
-        onTemplateSelected(selectedTemplate);
-    };
+  const handleCustomTemplateChange = (
+    event: ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const customTemplateValue = event.target.value;
+    setCustomTemplate(customTemplateValue);
+  };
 
-    return (
-        <div className="mb-4">
-            <Label>Select Template</Label>
-            <select
-                value={template}
-                onChange={handleTemplateChange}
-                className="border rounded p-2 mb-2 w-full"
-            >
-                <option value="">-- Select a Template --</option>
-                {Object.entries(templates).map(([key, value]) => (
-                    <option key={key} value={value}>
-                        {key}
-                    </option>
-                ))}
-            </select>
-            <Button onClick={() => onTemplateSelected(template)} disabled={!template}>
-                Process Data
-            </Button>
-        </div>
-    );
+  const handleApplyCustomTemplate = () => {
+    onCustomTemplateSelected(customTemplate);
+  };
+
+  return (
+    <div className='mb-4'>
+      <Label>Enter Custom Template</Label>
+      <Textarea
+        value={customTemplate}
+        onChange={handleCustomTemplateChange}
+        placeholder='Enter custom template (@ symbol for column headers)'
+      />
+      <Button onClick={handleApplyCustomTemplate}>Apply Custom Template</Button>
+    </div>
+  );
 };
 
 export default TemplateSelector;
