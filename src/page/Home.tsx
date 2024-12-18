@@ -5,6 +5,11 @@ import FileUploader from '../components/FileUploader';
 import TemplateSelector from '../components/TemplateSelector';
 import FileHeaders from '../components/FileHeaders';
 import ProcessedData from '../components/ProcessedData';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+
+pdfMake.vfs = pdfFonts.vfs;
 
 const Home = () => {
   const [, setFile] = useState<File | null>(null);
@@ -12,8 +17,14 @@ const Home = () => {
   const [tableData, setTableData] = useState<{ [key: string]: string }[]>([]);
   const [, setTemplate] = useState<string>('');
   const [processedData, setProcessedData] = useState<string[]>([]);
+  const ALLOWED_FILE_EXTENSIONS = ['.xls', '.xlsx', '.csv'];
+
 
   const handleFileSelected = (file: File) => {
+    if (!ALLOWED_FILE_EXTENSIONS.some(ext => file.name.toLowerCase().endsWith(ext))) {
+        alert('Please upload only Excel (.xls, .xlsx) or CSV files');
+        return;
+      }
     setFile(file);
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -50,11 +61,31 @@ const Home = () => {
     setProcessedData(processed);
   };
 
-  const downloadProcessedData = () => {
-    const blob = new Blob([processedData.join('\n')], {
-      type: 'text/plain;charset=utf-8',
-    });
-    saveAs(blob, 'processed_data.txt');
+  const downloadProcessedData = (format: 'txt' | 'pdf') => {
+    if (format === 'txt') {
+      const blob = new Blob([processedData.join('\n')], {
+        type: 'text/plain;charset=utf-8',
+      });
+      saveAs(blob, 'processed_data.txt');
+    } else {
+      // PDF Generation
+      const docDefinition = {
+        content: [
+          { text: 'Processed Data', style: 'header' },
+          { text: '\n' }, // Add some spacing
+          ...processedData.map(data => ({ text: data }))
+        ],
+        styles: {
+          header: {
+            fontSize: 18,
+            bold: true,
+            marginBottom: 10
+          }
+        }
+      };
+
+      pdfMake.createPdf(docDefinition).download('processed_data.pdf');
+    }
   };
 
   return (
