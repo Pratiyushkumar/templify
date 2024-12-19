@@ -23,21 +23,17 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
     const handleDrop = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         setDragging(false);
-    
-        // const uploadedFile = e.dataTransfer.files[0];
-    
-        // if (uploadedFile && uploadedFile.type === 'application/vnd.ms-excel') {
-        //   setFile(uploadedFile);
-        //   setError('');
-        // } else {
-        //   setError('Only .xls files are allowed!');
-        // }
+
+        const uploadedFile = e.dataTransfer.files[0];
+        if (uploadedFile) {
+          handleFileChange({ target: { files: [uploadedFile] } } as unknown as ChangeEvent<HTMLInputElement>);
+        }        
       };
 
-    const triggerFileInput = () => {
-        const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-        fileInput.click();
-      };
+    // const triggerFileInput = () => {
+    //     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    //     fileInput.click();
+    //   };
     // my changes end 
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +44,6 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
             );
             
             if (!isValid) {
-                // Reset the input value
                 if (inputRef.current) {
                     inputRef.current.value = '';
                 }
@@ -58,6 +53,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
             }
             
             setFile(file);
+            setError('');
             onFileSelected(file);
         }
     };
@@ -76,28 +72,30 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            onClick={triggerFileInput}
           >
-            {file ? (
-              <p className="text-gray-700 dark:text-gray-200">File Uploaded: {file.name}</p>
-            ) : (
-              <p className="text-gray-500 dark:text-gray-400">Drag & Drop your file here or click to upload</p>
-            )}
             <input
+              ref={inputRef}
               id="fileInput"
               type="file"
-              accept=".xlsx, .xls"
+              accept=".xlsx, .xls, .csv"
               onChange={handleFileChange}
               className="hidden"
             />
-            <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
-                            
-            </div>
+            {file ? (
+              <p className="text-gray-700 dark:text-gray-200">File Uploaded: {file.name}</p>
+            ) : (
+              <>
+                <p className="text-gray-500 dark:text-gray-400 mb-4">Drag & Drop your file here</p>
+              </>
+            )}
           </div>
+          <button onClick={() => inputRef.current?.click()}
+          className="px-4 py-2 mt-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+              Click to Upload
+          </button>
           {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
         </div>
       );
 };
 
 export default FileUploader;
-

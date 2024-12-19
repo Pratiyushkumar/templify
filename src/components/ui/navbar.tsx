@@ -4,7 +4,7 @@ import { Button } from './button';
 
 const Navbar: FC = () => {
   return (
-    <nav className="fixed top-0 mt-2 w-full bg-gray-800/20 backdrop-blur-sm border-b border-gray-700/30 z-50">
+    <nav className="fixed top-0 w-full bg-gray-800/20 backdrop-blur-sm border-b border-gray-700/30 z-50">
       <div className="container flex h-14 items-center justify-between p-6">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-bold text-white">

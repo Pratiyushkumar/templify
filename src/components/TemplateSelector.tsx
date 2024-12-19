@@ -24,8 +24,8 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   };
 
   return (
-    <div className='mb-4 space-y-3'>
-      <Label>Enter Custom Template</Label>
+    <div className='mb-4 space-y-3 text-white'>
+      <Label className='text-lg'>Enter Custom Template</Label>
       <Textarea
         value={customTemplate}
         onChange={handleCustomTemplateChange}
