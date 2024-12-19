@@ -36,28 +36,36 @@ const words = [
 function Hero() {
   return (
     <div>
-      <Navbar />
-      <div className="h-[100vh] w-full flex flex-col bg-neutral-950 items-center justify-center   ">
-        <p className="text-neutral-600 dark:text-neutral-200 text-base sm:text-base  ">
-          Upload your files, define a template, and let us do the rest—convert
-          your data into customized text or PDFs in no time!
-        </p>
-        <TypewriterEffectSmooth words={words} />
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-          <button className="px-8 py-4  rounded-lg bg-blue-500 border dark:border-white border-transparent font-semibold text-white text-sm z-50">
-            <Link to="/home">
-              <p className="tracking-wider text-xl capitalize"> Try Now</p>
-            </Link>
-          </button>
-          <button className="px-8 py-4   rounded-lg font-semibold bg-white text-black border border-black text-sm z-50">
-            <Link to="/home">
-              <p className="  tracking-wider text-xl capitalize"> Sign up</p>
-            </Link>
-          </button>
-        </div>
-        <BackgroundBeams />
-      </div>
+  <Navbar />
+  <div className="h-screen w-full flex flex-col bg-neutral-950 items-center justify-center px-6 md:px-12">
+    {/* Hero Description */}
+    <p className="text-neutral-400 dark:text-neutral-200 text-center text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed">
+      Upload your files, define a template, and let us do the rest—convert your
+      data into customized text or PDFs in no time!
+    </p>
+
+    {/* Typewriter Effect */}
+    <TypewriterEffectSmooth words={words} />
+
+    {/* Buttons */}
+    <div className="w-full sm:w-auto flex flex-col md:flex-row mt-6 space-y-4 md:space-y-0 md:space-x-4">
+      <button className="px-4 md:px-8 py-2 md:py-4 rounded-md md:rounded-lg bg-blue-500 border dark:border-white border-transparent font-semibold text-white text-sm md:text-base transition duration-300 hover:bg-blue-600">
+        <Link to="/home">
+          <p className="tracking-wider text-lg capitalize">Try Now</p>
+        </Link>
+      </button>
+      <button className=" px-4 md:px-8 py-2 md:py-4 rounded-md md:rounded-lg font-semibold bg-white text-black border border-black text-sm md:text-base transition duration-300 hover:bg-neutral-200">
+        <Link to="/signup">
+          <p className="tracking-wider text-lg capitalize">Sign Up</p>
+        </Link>
+      </button>
     </div>
+
+    {/* Background Beams */}
+    <BackgroundBeams />
+  </div>
+</div>
+
   )
 }
 
