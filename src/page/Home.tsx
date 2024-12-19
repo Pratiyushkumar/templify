@@ -7,6 +7,8 @@ import FileHeaders from '../components/FileHeaders';
 import ProcessedData from '../components/ProcessedData';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import Header from '../components/Header';
+import Navbar from '../components/ui/navbar';
 
 
 pdfMake.vfs = pdfFonts.vfs;
@@ -68,11 +70,10 @@ const Home = () => {
       });
       saveAs(blob, 'processed_data.txt');
     } else {
-      // PDF Generation
       const docDefinition = {
         content: [
           { text: 'Processed Data', style: 'header' },
-          { text: '\n' }, // Add some spacing
+          { text: '\n' },
           ...processedData.map(data => ({ text: data }))
         ],
         styles: {
@@ -87,24 +88,26 @@ const Home = () => {
       pdfMake.createPdf(docDefinition).download('processed_data.pdf');
     }
   };
-
   return (
-    <section>
-      <h1>File Processor</h1>
+    <div className='h-full top-0 mt-[-40px] w-full bg-black'>
+      <Navbar/>
+      <section className='w-3/4 mx-auto space-y-5 p-14'>  
 
-      <FileUploader onFileSelected={handleFileSelected} />
+        <FileUploader onFileSelected={handleFileSelected} />
 
-      {headers.length > 0 && <FileHeaders headers={headers} />}
+        {headers.length > 0 && <FileHeaders headers={headers} />}
 
-      <TemplateSelector onCustomTemplateSelected={handleTemplateSelected} />
+        <TemplateSelector onCustomTemplateSelected={handleTemplateSelected} />
 
-      {processedData.length > 0 && (
-        <ProcessedData
-          data={processedData}
-          downloadProcessedData={downloadProcessedData}
-        />
-      )}
-    </section>
+        {processedData.length > 0 && (
+          <ProcessedData
+            data={processedData}
+            downloadProcessedData={downloadProcessedData}
+          />
+        )}
+      </section>
+    </div>
+    
   );
 };
 
