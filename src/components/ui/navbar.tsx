@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from "react-router";
 import { Button } from './button';
 
 const Navbar: FC = () => {
@@ -6,9 +7,13 @@ const Navbar: FC = () => {
     <nav className="fixed top-0 mt-2 w-full bg-gray-800/20 backdrop-blur-sm border-b border-gray-700/30 z-50">
       <div className="container flex h-14 items-center justify-between p-6">
         <div className="flex items-center gap-2">
-          <h1 className="text-2xl font-bold text-white">Templify</h1>
+          <h1 className="text-2xl font-bold text-white">
+            <Link to="/">
+              Templify
+            </Link>
+          </h1>
         </div>
-        
+
         <Button className="w-32" variant="default">
           Try now!
         </Button>
