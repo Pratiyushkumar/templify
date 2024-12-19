@@ -1,6 +1,8 @@
 import { ChangeEvent, useRef, useState, DragEvent } from "react"
 import { BsCloudUpload } from "react-icons/bs";
 import UploadedFileInfo from "./UploadedFileInfo";
+
+import { FaRegCircleCheck } from "react-icons/fa6";
 interface FileUploaderProps {
   onFileSelected: (file: File) => void
 }
@@ -89,7 +91,11 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
         className="hidden"
       />
       {file ? (
-        <div className="px-5">
+        <div className="px-5 space-y-2">
+          <div className="flex items-center  text-gray-300 gap-2">
+            <FaRegCircleCheck className=" w-3 h-3" />
+            <p className="text-sm tracking-wider normal-case">File uploaded successfully</p>
+        </div>
           <UploadedFileInfo file={file} />
         </div>
       ) : (
