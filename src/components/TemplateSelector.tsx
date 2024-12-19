@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from 'react';
 import { Label } from '../components/ui/label';
-import { Button } from '../components/ui/button';
 import { Textarea } from './ui/textarea';
 
 interface TemplateSelectorProps {
@@ -20,18 +19,19 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   };
 
   const handleApplyCustomTemplate = () => {
+    if(customTemplate === '') return;
     onCustomTemplateSelected(customTemplate);
   };
 
   return (
-    <div className='mb-4 space-y-3 text-white'>
-      <Label className='text-lg'>Enter Custom Template</Label>
+    <div className='mb-4 space-y-2 text-white'>
+      <Label className='text-lg'>Enter your template</Label>
       <Textarea
         value={customTemplate}
         onChange={handleCustomTemplateChange}
-        placeholder='Enter custom template (@ symbol for column headers)'
+        placeholder='Enter template (@ symbol for column headers)'
       />
-      <Button onClick={handleApplyCustomTemplate}>Apply Custom Template</Button>
+      <button className='mt-2 px-2 sm:px-4 md:px-5 py-3 border border-gray-400 rounded-lg' onClick={handleApplyCustomTemplate}>Apply Template</button>
     </div>
   );
 };
