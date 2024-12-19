@@ -2,7 +2,6 @@ import { TypewriterEffectSmooth } from "../components/ui/typewriter-effect"
 import { BackgroundBeams } from "../components/ui/background-beams"
 import Navbar from "../components/ui/navbar"
 import { Link } from "react-router"
-
 const words = [
   {
     text: "From",
@@ -49,16 +48,16 @@ function Hero() {
 
     {/* Buttons */}
     <div className="w-full sm:w-auto flex flex-col md:flex-row mt-6 space-y-4 md:space-y-0 md:space-x-4">
-      <button className="px-4 md:px-8 py-2 md:py-4 rounded-md md:rounded-lg bg-blue-500 border dark:border-white border-transparent font-semibold text-white text-sm md:text-base transition duration-300 hover:bg-blue-600">
-        <Link to="/home">
-          <p className="tracking-wider text-lg capitalize">Try Now</p>
-        </Link>
-      </button>
-      <button className=" px-4 md:px-8 py-2 md:py-4 rounded-md md:rounded-lg font-semibold bg-white text-black border border-black text-sm md:text-base transition duration-300 hover:bg-neutral-200">
-        <Link to="/signup">
-          <p className="tracking-wider text-lg capitalize">Sign Up</p>
-        </Link>
-      </button>
+    <button className="px-8 py-4  rounded-lg bg-blue-500 border dark:border-white border-transparent font-semibold text-white text-sm z-50">
+            <Link to="/home">
+              <p className="tracking-wider text-xl capitalize"> Try Now</p>
+            </Link>
+          </button>
+          <button className="px-8 py-4   rounded-lg font-semibold bg-white text-black border border-black text-sm z-50">
+            <Link to="/home">
+              <p className="  tracking-wider text-xl capitalize"> Sign up</p>
+            </Link>
+          </button>
     </div>
 
     {/* Background Beams */}
