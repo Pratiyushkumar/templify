@@ -1,21 +1,10 @@
 import { FC } from 'react';
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import { Button } from './button';
-import { useAuth } from '../../hooks/useAuth';
+import useLogout from '../../hooks/useLogout';
 
 const Navbar: FC = () => {
-  const { user, logoutUser } = useAuth();
-
-  const handleLogout = async () => {
-    try {
-      await logoutUser();
-    } catch (error) {
-      console.error("Logout failed", error);
-    }
-  };
-  const location = useLocation();
-  const currentPath = location.pathname;
-  console.log(currentPath);
+  const {handleLogout, user, currentPath} = useLogout();
 
   return (
     <nav className="fixed top-0 w-full bg-gray-800/20 backdrop-blur-sm border-b border-gray-700/30 z-50">
@@ -36,7 +25,7 @@ const Navbar: FC = () => {
           >
             Logout
           </Button>
-        ) : (
+        ) : (currentPath !== '/home' &&
           <div className="hidden md:block">
             <Button className="w-24 md:w-32 py-2 md:py-6" variant="default">
               <Link to="">
