@@ -7,7 +7,6 @@ import FileHeaders from '../components/FileHeaders';
 import ProcessedData from '../components/ProcessedData';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import Header from '../components/Header';
 import Navbar from '../components/ui/navbar';
 
 
@@ -89,9 +88,10 @@ const Home = () => {
     }
   };
   return (
-    <div className='h-full top-0 mt-[-40px] w-full bg-black'>
+    <div className='min-h-screen h-full  w-full -mt-5 bg-black space-y-5'>
       <Navbar/>
-      <section className='w-3/4 mx-auto space-y-5 p-14'>  
+
+      <div className='w-full md:w-3/4 mx-auto p-5 py-12 md:p-14'>  
 
         <FileUploader onFileSelected={handleFileSelected} />
 
@@ -105,7 +105,7 @@ const Home = () => {
             downloadProcessedData={downloadProcessedData}
           />
         )}
-      </section>
+      </div>
     </div>
     
   );
