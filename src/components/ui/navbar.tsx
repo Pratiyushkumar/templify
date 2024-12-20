@@ -22,7 +22,9 @@ const Navbar: FC = () => {
       <div className="container flex h-14 items-center  justify-center md:justify-between py-4 px-6 md:py-8 md:px-10 lg:px-14">
         <div className="flex  items-center gap-2">
           <h1 className=" text-2xl md:text-3xl lg:text-4xl text-center  font-bold text-blue-500 tracking-wider">
-            <Link to="/">Templify</Link>
+            {
+              user ? (<Link to="/home">Templify</Link>) : (<Link to="/">Templify</Link>)
+            }
           </h1>
         </div>
 

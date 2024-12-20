@@ -14,10 +14,11 @@ const SignIn = () => {
   const { user, loginUser } = useAuth();
 
   useEffect(() => {
-    if (user) {
-      navigate('/');
+    const isInitialLoad = !email && !password;
+    if (user && isInitialLoad) {
+      navigate('/home');
     }
-  }, [user, navigate]);
+  }, [user, navigate, email, password]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
