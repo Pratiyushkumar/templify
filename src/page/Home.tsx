@@ -87,6 +87,7 @@ const Home = () => {
       pdfMake.createPdf(docDefinition).download('processed_data.pdf');
     }
   };
+  
   return (
     <div className='min-h-screen h-full  w-full -mt-5 bg-black space-y-5'>
       <Navbar/>
