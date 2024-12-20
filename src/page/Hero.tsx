@@ -49,7 +49,7 @@ function Hero() {
         {/* Buttons */}
         <div className="w-full sm:w-auto flex flex-col md:flex-row mt-6 space-y-4 md:space-y-0 md:space-x-4">
           <button className="px-8 py-4  rounded-lg bg-blue-500 border dark:border-white border-transparent font-semibold text-white text-sm z-50">
-            <Link to="/home">
+            <Link to="">
               <p className="tracking-wider text-xl capitalize"> Try Now</p>
             </Link>
           </button>
