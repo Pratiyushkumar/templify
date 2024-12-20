@@ -1,9 +1,60 @@
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import Navbar from '../components/ui/navbar';
-import { Link } from 'react-router-dom';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const { user, loginUser } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setEmailError('');
+    setPasswordError('');
+
+    if (!email) {
+      setEmailError('Email is required');
+      return;
+    }
+    if (!password) {
+      setPasswordError('Password is required');
+      return;
+    }
+
+    try {
+      await loginUser({ email, password });
+      navigate('/home');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setPasswordError(error.message);
+      } else {
+        setPasswordError('An error occurred during sign in');
+      }
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (emailError) setEmailError('');
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (passwordError) setPasswordError('');
+  };
+
   return (
     <div className="min-h-screen bg-gray-950">
       <Navbar />
@@ -14,19 +65,37 @@ const SignIn = () => {
               Welcome back!
             </h1>
           </div>
-          <div className="space-y-4">
-            <Input
-              className="bg-gray-800/50 border-gray-700"
-              placeholder="Email"
-              type="email"
-            />
-            <Input
-              className="bg-gray-800/50 border-gray-700"
-              placeholder="Password"
-              type="password"
-            />
-            <Button className="w-full">Sign In</Button>
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Input
+                className="bg-gray-800/50 border-gray-700 text-white"
+                placeholder="Email"
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                aria-label="Email"
+              />
+              {emailError && <div className="text-red-500 text-sm">{emailError}</div>}
+            </div>
+            <div className="space-y-2">
+              <Input
+                className="bg-gray-800/50 border-gray-700 text-white"
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                aria-label="Password"
+              />
+              {passwordError && <div className="text-red-500 text-sm">{passwordError}</div>}
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-500"
+              disabled={!email || !password}
+            >
+              Sign In
+            </Button>
+          </form>
           <div className="text-center text-sm text-gray-400">
             Don't have an account?{' '}
             <Link to="/signup" className="text-blue-400 hover:text-blue-300">
