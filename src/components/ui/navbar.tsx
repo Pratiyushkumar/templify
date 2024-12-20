@@ -8,7 +8,7 @@ const Navbar: FC = () => {
 
   return (
     <nav className="fixed top-0 w-full bg-gray-800/20 backdrop-blur-sm border-b border-gray-700/30 z-50">
-      <div className="container flex h-14 items-center  justify-center md:justify-between py-4 px-6 md:py-8 md:px-10 lg:px-14">
+      <div className="container flex h-14 items-center gap-10 justify-between py-4 px-6 md:py-8 md:px-10 lg:px-14">
         <div className="flex  items-center gap-2">
           <h1 className=" text-2xl md:text-3xl lg:text-4xl text-center  font-bold text-blue-500 tracking-wider">
             {
@@ -19,7 +19,7 @@ const Navbar: FC = () => {
 
         {user ? (
           <Button
-            className="w-32 bg-red-600 hover:bg-red-500"
+            className="w-20 sm:24 md:w-32 bg-red-600 hover:bg-red-500"
             variant="default"
             onClick={handleLogout}
           >
