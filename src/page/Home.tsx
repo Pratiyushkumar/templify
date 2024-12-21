@@ -8,6 +8,7 @@ import ProcessedData from '../components/ProcessedData';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Navbar from '../components/ui/navbar';
+import { text } from 'stream/consumers';
 
 pdfMake.vfs = pdfFonts.vfs;
 
@@ -56,7 +57,7 @@ const Home = () => {
         const regex = new RegExp(`@${header}`, 'g');
         processedRow = processedRow.replace(regex, row[header] || '');
       });
-      return processedRow;
+      return processedRow+'\n\n\n';
     });
     setProcessedData(processed);
   };
@@ -72,7 +73,8 @@ const Home = () => {
         content: [
           { text: 'Processed Data', style: 'header' },
           { text: '\n' },
-          ...processedData.map(data => ({ text: data }))
+          ...processedData.map(data => ({ text: data })),
+          { text: '\n\n'}
         ],
         styles: {
           header: {
