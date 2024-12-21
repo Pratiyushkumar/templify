@@ -1,6 +1,7 @@
 import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
+import { useFileContext } from '../hooks/useFileContext';
 
 interface TemplateSelectorProps {
   onCustomTemplateSelected: (customTemplate: string) => void;
@@ -11,7 +12,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   onCustomTemplateSelected,
   headers,
 }) => {
-  const [customTemplate, setCustomTemplate] = useState<string>('');
+  const {customTemplate, setCustomTemplate} = useFileContext();
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [cursorPosition, setCursorPosition] = useState<{ x: number; y: number } | null>(null);
