@@ -146,7 +146,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         try {
             const scopes = ['https://www.googleapis.com/auth/userinfo.email',
                 'https://www.googleapis.com/auth/userinfo.profile',];
-            const response = await account.createOAuth2Session(
+            await account.createOAuth2Session(
                 OAuthProvider.Google,
                 'http://localhost:5173/home',
                 'http://localhost:5173/signin',
