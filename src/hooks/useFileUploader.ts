@@ -1,9 +1,10 @@
 import { ChangeEvent, DragEvent, useRef, useState } from "react"
+import useFileHandling from "./useFileHandling"
 interface FileUploaderProps {
     onFileSelected: (file: File) => void
   }
 const useFileUploader =  ({onFileSelected}: FileUploaderProps) => {
-
+    const {handleResetData} = useFileHandling();
     const inputRef = useRef<HTMLInputElement>(null)
     const [error, setError] = useState("")
     const [file, setFile] = useState<File | null>(null)
@@ -53,7 +54,18 @@ const useFileUploader =  ({onFileSelected}: FileUploaderProps) => {
       }
     }
 
-    return {handleDragLeave, handleDragOver, handleDrop, handleFileChange, error,file, inputRef, dragging}
+    const handleResetButton = () => {
+      if(file){
+        setFile(null);
+        handleResetData();
+      }
+      if(inputRef.current){
+        inputRef.current.value = ""
+      }
+      setError("");
+    }
+
+    return {handleDragLeave, handleDragOver, handleDrop, handleFileChange, error,file, inputRef, dragging, handleResetButton}
 }
 
 export default useFileUploader;
