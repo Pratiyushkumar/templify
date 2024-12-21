@@ -5,7 +5,7 @@ import { FaRegCircleCheck } from "react-icons/fa6"
 import useFileUploader from "../hooks/useFileUploader"
 import BackgroundGrid from "./BackgroundGrid"
 interface FileUploaderProps {
-  onFileSelected: (file: File) => void
+  onFileSelected: (file: File) => void;
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
@@ -26,11 +26,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
         onClick={() => inputRef.current?.click()}
         className={`relative
         w-full max-w-md h-48 rounded-lg border-2 border-dashed
-        ${
-          dragging
-            ? "border-blue-500 bg-blue-100 dark:bg-blue-900"
-            : "border-gray-500 bg-slate-800 dark:bg-gray-800"
-        }
+        ${dragging
+            ? 'border-blue-500 bg-blue-100 dark:bg-blue-900'
+            : 'border-gray-500 bg-slate-800 dark:bg-gray-800'
+          }
         flex flex-col justify-center items-center text-center
         transition-all duration-300 cursor-pointer
       `}
@@ -100,4 +99,4 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
   )
 }
 
-export default FileUploader
+export default FileUploader;
