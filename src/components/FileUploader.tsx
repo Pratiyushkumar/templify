@@ -112,34 +112,31 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
                 or drag & drop
               </p>
             </div>
-            <div className='text-gray-400 space-y-2 md:space-y-1'>
-              <p className='text-sm md:text-[12px] md:text-sm'>
-                Maximum file size is 2 MB
-              </p>
-              <p className='text-[12px] md:text-sm'>
-                Accepted file formats are:
-              </p>
+
+            <div className="text-gray-400 space-y-2 md:space-y-1">
+              <p className="text-sm md:text-[12px] md:text-sm">Maximum file size is 2 MB</p>
+              <p className="text-[12px] md:text-sm">Accepted file formats are:</p>
             </div>
 
-            <div className='flex space-x-3 mt-1'>
+            <div className="flex space-x-3 mt-1">
               <img
-                src='../../src/assets/icons/csv-file.png'
-                alt='CSV'
-                className='w-8 h-8'
+                src="../../src/assets/icons/csv-file.png"
+                alt="CSV"
+                className="w-8 h-8"
               />
               <img
-                src='../../src/assets/icons/xls.png'
-                alt='XLSX'
-                className='w-8 h-8'
+                src="../../src/assets/icons/xls.png"
+                alt="XLSX"
+                className="w-8 h-8"
               />
             </div>
           </div>
         )}
       </div>
 
-      {error && <p className='mt-2 text-red-500 text-sm'>{error}</p>}
+      {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
     </div>
-  );
-};
+  )
+}
 
 export default FileUploader;
