@@ -4,15 +4,17 @@ import FileHeaders from "../components/FileHeaders"
 import ProcessedData from "../components/ProcessedData"
 import Navbar from "../components/ui/navbar"
 import useFileHandling from "../hooks/useFileHandling"
+import { useFileContext } from "../context/FileContext"
 
 const Home = () => {
   const {
     handleFileSelected,
     handleTemplateSelected,
     downloadProcessedData,
-    headers,
-    processedData,
   } = useFileHandling()
+
+  const {headers,processedData} = useFileContext();
+
 
   return (
     <div className="min-h-screen overflow-hidden  w-full  bg-black space-y-5">

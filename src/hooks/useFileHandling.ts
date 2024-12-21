@@ -1,17 +1,22 @@
-import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { useFileContext } from '../context/FileContext';
 
 
 pdfMake.vfs = pdfFonts.vfs;
 const useFileHandling = () => {
-    const [, setFile] = useState<File | null>(null);
-    const [headers, setHeaders] = useState<string[]>([]);
-    const [tableData, setTableData] = useState<{ [key: string]: string }[]>([]);
-    const [, setTemplate] = useState<string>('');
-    const [processedData, setProcessedData] = useState<string[]>([]);
+  const {
+          setFile,
+          headers,
+          setHeaders,
+          tableData,
+          setTableData,
+          setTemplate,
+          processedData,
+          setProcessedData,
+        } = useFileContext();
     const ALLOWED_FILE_EXTENSIONS = ['.xls', '.xlsx', '.csv'];
   
   
