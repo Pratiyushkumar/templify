@@ -2,6 +2,7 @@ import { TypewriterEffectSmooth } from "../components/ui/typewriter-effect"
 import { BackgroundBeams } from "../components/ui/background-beams"
 import Navbar from "../components/ui/navbar"
 import { useNavigate } from "react-router"
+import useLogout from "../hooks/useLogout"
 const words = [
   {
     text: "From",
@@ -34,6 +35,7 @@ const words = [
 ]
 function Hero() {
   const navigate = useNavigate();
+  const {user} = useLogout();
   return (
     <div>
       <Navbar />
@@ -51,9 +53,12 @@ function Hero() {
               <p className="tracking-wider text-xl capitalize"> Try Now</p>
             </button>
             {" "}
-            <button className="px-8 py-4   rounded-lg font-semibold bg-white text-black border border-black text-sm z-50" onClick={() => navigate("/signup")}>
+            {
+              !user && <button className="px-8 py-4   rounded-lg font-semibold bg-white text-black border border-black text-sm z-50" onClick={() => navigate("/signup")}>
               <p className="  tracking-wider text-xl capitalize"> Sign up</p>
             </button>
+            }
+            
         </div>
 
         <BackgroundBeams />
