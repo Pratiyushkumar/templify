@@ -4,7 +4,7 @@ import { Button } from './button';
 import useLogout from '../../hooks/useLogout';
 
 const Navbar: FC = () => {
-  const {handleLogout, user, currentPath} = useLogout();
+  const { handleLogout, user, currentPath } = useLogout();
 
   return (
     <nav className="fixed top-0 w-full bg-gray-800/20 backdrop-blur-sm border-b border-gray-700/30 z-50">
@@ -28,7 +28,7 @@ const Navbar: FC = () => {
         ) : (currentPath !== '/home' &&
           <div className="hidden md:block">
             <Button className="w-24 md:w-32 py-2 md:py-6" variant="default">
-              <Link to="">
+              <Link to="/home">
                 <p className="text-sm md:text-lg py-1 md:py-4 tracking-wider">Try Now</p>
               </Link>
             </Button>
