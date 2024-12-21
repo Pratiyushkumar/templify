@@ -1,6 +1,6 @@
 interface ProcessedDataProps {
     data: string[];
-    downloadProcessedData: (format:'txt'|'pdf') => void;
+    downloadProcessedData: (format: 'txt' | 'pdf') => void;
 }
 
 const ProcessedData: React.FC<ProcessedDataProps> = ({ data, downloadProcessedData }) => {
@@ -9,19 +9,22 @@ const ProcessedData: React.FC<ProcessedDataProps> = ({ data, downloadProcessedDa
             <h3 className="text-lg text-white font-semibold mb-2">Preview</h3>
             <div className="bg-slate-800 border border-gray-400 text-gray-300 p-4 rounded-lg max-h-60 overflow-y-auto">
                 {data.map((row, index) => (
-                    <div key={index} className="mb-2">
+                    <pre
+                        key={index}
+                        className="font-sans mb-4 last:mb-0 whitespace-pre-wrap break-words"
+                    >
                         {row}
-                    </div>
+                    </pre>
                 ))}
             </div>
             <div className="flex gap-2 text-white mt-5 text-sm md:text-base">
-            <button className='px-2 md:px-5 py-3 border border-gray-400 rounded-lg' onClick={() => downloadProcessedData('txt')}>
-            <p >Download as TXT</p>
-            </button>
-            <button className='px-2 md:px-5 py-3 border border-gray-400 rounded-lg' onClick={() => downloadProcessedData('pdf')}>
-            Download as PDF
-            </button>
-        </div>
+                <button className='px-2 md:px-5 py-3 border border-gray-400 rounded-lg' onClick={() => downloadProcessedData('txt')}>
+                    <p >Download as TXT</p>
+                </button>
+                <button className='px-2 md:px-5 py-3 border border-gray-400 rounded-lg' onClick={() => downloadProcessedData('pdf')}>
+                    Download as PDF
+                </button>
+            </div>
         </div>
     );
 };
