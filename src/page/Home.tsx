@@ -9,7 +9,6 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Navbar from '../components/ui/navbar';
 
-
 pdfMake.vfs = pdfFonts.vfs;
 
 const Home = () => {
@@ -98,7 +97,7 @@ const Home = () => {
 
         {headers.length > 0 && <FileHeaders headers={headers} />}
 
-        <TemplateSelector onCustomTemplateSelected={handleTemplateSelected} />
+        <TemplateSelector onCustomTemplateSelected={handleTemplateSelected} headers={headers} />
 
         {processedData.length > 0 && (
           <ProcessedData
