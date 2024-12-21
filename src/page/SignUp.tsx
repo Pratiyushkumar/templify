@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import useSignup from '../hooks/useSignup';
+import GoogleButton from '../components/GoogleButton';
 
 const SignUp = () => {
-  const {formData,errorMessage, loading, handleChange, handleSubmit,} = useSignup();
+  const { formData, errorMessage, loading, handleChange, handleSubmit, } = useSignup();
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-950">
@@ -28,7 +29,7 @@ const SignUp = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-            
+
               />
             </div>
             <div>
@@ -39,7 +40,7 @@ const SignUp = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-            
+
               />
             </div>
             <div>
@@ -50,7 +51,7 @@ const SignUp = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-            
+
               />
             </div>
             <div>
@@ -61,7 +62,7 @@ const SignUp = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-            
+
               />
             </div>
             {errorMessage && (
@@ -83,6 +84,10 @@ const SignUp = () => {
               Sign in
             </button>
           </div>
+          <div className="relative flex justify-center capitalize text-base">
+            <span className="bg-gray-900/50 px-2 text-gray-400">or</span>
+          </div>
+          <GoogleButton />
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ const Home = () => {
 
         {headers.length > 0 && <FileHeaders headers={headers} />}
 
-        <TemplateSelector onCustomTemplateSelected={handleTemplateSelected} />
+        <TemplateSelector onCustomTemplateSelected={handleTemplateSelected} headers={headers} />
 
         {processedData.length > 0 && (
           <ProcessedData

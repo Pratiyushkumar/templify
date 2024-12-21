@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { account } from '../appwrite/appwriteConfig';
+import { OAuthProvider } from 'appwrite';
 
 interface User {
     name: string;
@@ -16,7 +17,12 @@ interface AuthContextType {
     user: User | null;
     loginUser: (userInfo: LoginCredentials) => Promise<void>;
     logoutUser: () => Promise<void>;
-    registerUser: (name: string, email: string, password: string) => Promise<void>;
+    registerUser: (
+        name: string,
+        email: string,
+        password: string
+    ) => Promise<void>;
+    loginWithGoogle: () => Promise<void>;
     loading: boolean;
     error: string | null;
 }
@@ -26,8 +32,9 @@ const AuthContext = createContext<AuthContextType>({
     loginUser: async () => { },
     logoutUser: () => Promise.resolve(),
     registerUser: () => Promise.resolve(),
+    loginWithGoogle: async () => { },
     loading: false,
-    error: null
+    error: null,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -38,19 +45,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const oauth2state = urlParams.get('oauth2state');
+
+        // if (oauth2state) {
         checkSession();
+        // }
     }, []);
 
     const checkSession = async () => {
         try {
             const session = await account.getSession('current');
+            console.log("session", session);
             if (session) {
                 const accountDetails = await account.get();
                 setUser({
                     name: accountDetails.name,
                     email: accountDetails.email,
-                    password: accountDetails.password ?? ""
+                    password: accountDetails.password ?? '',
                 });
+
+                // // Check if we're on signin page after successful OAuth
+                // if (window.location.pathname === '/signin') {
+                //     window.location.href = '/home';
+                // }
             }
         } catch (error) {
             console.log('No active session', error);
@@ -71,23 +89,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             }
 
             // Now create new session
-            await account.createEmailPasswordSession(userInfo.email, userInfo.password);
+            await account.createEmailPasswordSession(
+                userInfo.email,
+                userInfo.password
+            );
             const accountDetails = await account.get();
             setUser({
                 name: accountDetails.name,
                 email: accountDetails.email,
-                password: accountDetails.password ?? ""
+                password: accountDetails.password ?? '',
             });
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.error('Login error:', error);
-            const errorMessage = error.type === 'user_invalid_credentials'
-                ? 'Invalid email or password'
-                : error.type === 'user_not_found'
-                    ? 'User not found'
-                    : error.type === 'user_session_already_exists'
-                        ? 'Session already exists. Please try again.'
-                        : 'An error occurred during login. Please try again.';
+            const errorMessage =
+                error.type === 'user_invalid_credentials'
+                    ? 'Invalid email or password'
+                    : error.type === 'user_not_found'
+                        ? 'User not found'
+                        : error.type === 'user_session_already_exists'
+                            ? 'Session already exists. Please try again.'
+                            : 'An error occurred during login. Please try again.';
             setError(errorMessage);
             throw new Error(errorMessage);
         } finally {
@@ -108,9 +130,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         }
     };
 
-    const registerUser = async (name: string,
+    const registerUser = async (
+        name: string,
         email: string,
-        password: string): Promise<void> => {
+        password: string
+    ): Promise<void> => {
         setLoading(true);
         setError(null);
         try {
@@ -119,11 +143,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.error('Signup error:', error);
-            const errorMessage = error.type === 'user_already_exists'
-                ? 'An account with this email already exists.'
-                : 'An unexpected error occurred. Please try again.';
+            const errorMessage =
+                error.type === 'user_already_exists'
+                    ? 'An account with this email already exists.'
+                    : 'An unexpected error occurred. Please try again.';
             setError(errorMessage);
             throw new Error(errorMessage);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const loginWithGoogle = async (): Promise<void> => {
+        setLoading(true);
+        try {
+            const scopes = ['https://www.googleapis.com/auth/userinfo.email',
+                'https://www.googleapis.com/auth/userinfo.profile',];
+            const response = await account.createOAuth2Session(
+                OAuthProvider.Google,
+                'http://localhost:5173/home',
+                'http://localhost:5173/signin',
+                scopes
+            );
+            const accountDetails = await account.get();
+            setUser({
+                name: accountDetails.name,
+                email: accountDetails.email,
+                password: accountDetails.password ?? '',
+            });
+            console.log("response of google login", response);
+        } catch (error) {
+            console.error('Google login error:', error);
+            throw new Error('Failed to login with Google');
         } finally {
             setLoading(false);
         }
@@ -134,14 +185,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         loginUser,
         logoutUser,
         registerUser,
+        loginWithGoogle,
         loading,
-        error
+        error,
     };
 
     return (
-        <AuthContext.Provider value={contextData}>
-            {children}
-        </AuthContext.Provider>
+        <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
     );
 };
 
