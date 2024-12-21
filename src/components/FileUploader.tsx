@@ -1,9 +1,10 @@
-import { BsCloudUpload } from "react-icons/bs"
 import UploadedFileInfo from "./UploadedFileInfo"
 
 import { FaRegCircleCheck } from "react-icons/fa6"
 import useFileUploader from "../hooks/useFileUploader"
 import BackgroundGrid from "./BackgroundGrid"
+import DragDrop from "./DragDrop"
+import ResetButton from "./ResetButton"
 interface FileUploaderProps {
   onFileSelected: (file: File) => void;
 }
@@ -19,9 +20,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
     file,
     inputRef,
     dragging,
+    handleResetButton
   } = useFileUploader({ onFileSelected })
   return (
-    <div className="flex flex-col items-center my-8 ">
+    <div className="w-full flex flex-col items-center my-8 ">
       <div
         onClick={() => inputRef.current?.click()}
         className={`relative
@@ -59,42 +61,14 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
             <UploadedFileInfo file={file} />
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex flex-col items-center space-x-2 text-gray-400 gap-1">
-              <BsCloudUpload className="text-gray-400 w-7 h-7 md:w-8 md:h-8" />
-              <p className="text-[14px] md:text-[16px] dark:text-gray-400">
-                <span className="underline underline-offset-2">
-                  Click to upload
-                </span>{" "}
-                or drag & drop
-              </p>
-            </div>
-            <div className="text-gray-400 space-y-2 md:space-y-1">
-              <p className="text-sm md:text-[12px] md:text-sm">
-                Maximum file size is 10 MB
-              </p>
-              <p className="text-[12px] md:text-sm">
-                Accepted file formats are:
-              </p>
-            </div>
-
-            <div className="flex space-x-3 mt-1">
-              <img
-                src="../../src/assets/icons/csv-file.png"
-                alt="CSV"
-                className="w-8 h-8"
-              />
-              <img
-                src="../../src/assets/icons/xls.png"
-                alt="XLSX"
-                className="w-8 h-8"
-              />
-            </div>
-          </div>
+          <DragDrop />
         )}
       </div>
 
       {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
+      {
+        file && <ResetButton handleResetButton={handleResetButton}/>
+      }
     </div>
   )
 }
