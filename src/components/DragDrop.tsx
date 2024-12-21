@@ -22,12 +22,12 @@ function DragDrop() {
 
             <div className="flex space-x-3 mt-1">
               <img
-                src="../../src/assets/icons/csv-file.png"
+                src="https://res.cloudinary.com/daamrpzus/image/upload/v1734791561/templify/csv-file_pwnolt.png"
                 alt="CSV"
                 className="w-8 h-8"
               />
               <img
-                src="../../src/assets/icons/xls.png"
+                src="https://res.cloudinary.com/daamrpzus/image/upload/v1734791561/templify/xls_voqouw.png"
                 alt="XLSX"
                 className="w-8 h-8"
               />
