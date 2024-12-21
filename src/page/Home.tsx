@@ -4,7 +4,7 @@ import FileHeaders from "../components/FileHeaders"
 import ProcessedData from "../components/ProcessedData"
 import Navbar from "../components/ui/navbar"
 import useFileHandling from "../hooks/useFileHandling"
-import { useFileContext } from "../context/FileContext"
+import { useFileContext } from "../hooks/useFileContext"
 
 const Home = () => {
   const {
