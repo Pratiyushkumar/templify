@@ -14,11 +14,8 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route element={<PrivateRoutes />}>
-        
           <Route path='/home' element={<FileContextProvider><Home /></FileContextProvider>} />
-        
         </Route>
-        <Route path='/home' element={<FileContextProvider><Home /></FileContextProvider>} />
       </Routes>
     </AuthProvider>
   );
