@@ -142,14 +142,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     const loginWithGoogle = async (): Promise<void> => {
+        const BASE_URL = window.location.origin;
         setLoading(true);
         try {
             const scopes = ['https://www.googleapis.com/auth/userinfo.email',
                 'https://www.googleapis.com/auth/userinfo.profile',];
             await account.createOAuth2Session(
                 OAuthProvider.Google,
-                'http://localhost:5173/home',
-                'http://localhost:5173/signin',
+                `${BASE_URL}/home`,
+                `${BASE_URL}/signin`,
                 scopes
             );
             const accountDetails = await account.get();
