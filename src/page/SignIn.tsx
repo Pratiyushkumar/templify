@@ -3,9 +3,10 @@ import Navbar from '../components/ui/navbar';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import useSignin from '../hooks/useLogin';
+import GoogleButton from '../components/GoogleButton';
 
 const SignIn = () => {
-  const {handleSubmit, handleEmailChange, handlePasswordChange, email, password, emailError, passwordError} = useSignin();
+  const { handleSubmit, handleEmailChange, handlePasswordChange, email, password, emailError, passwordError } = useSignin();
   return (
     <div className="min-h-screen bg-gray-950">
       <Navbar />
@@ -47,12 +48,16 @@ const SignIn = () => {
               <p className='text-base md:text-lg tracking-wider text-white'>Sign in</p>
             </Button>
           </form>
-          <div className="text-center text-sm text-gray-400">
+          <div className="text-center text-base text-gray-400">
             Don't have an account?{' '}
             <Link to="/signup" className="text-blue-400 hover:text-blue-300">
               Sign up
             </Link>
           </div>
+          <div className="relative flex justify-center capitalize text-base">
+            <span className="bg-gray-900/50 px-2 text-gray-400">or</span>
+          </div>
+          <GoogleButton />
         </div>
       </div>
     </div>
