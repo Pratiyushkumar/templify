@@ -1,7 +1,7 @@
 import { TypewriterEffectSmooth } from "../components/ui/typewriter-effect"
 import { BackgroundBeams } from "../components/ui/background-beams"
 import Navbar from "../components/ui/navbar"
-import { Link } from "react-router"
+import { useNavigate } from "react-router"
 const words = [
   {
     text: "From",
@@ -33,34 +33,32 @@ const words = [
   },
 ]
 function Hero() {
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar />
       <div className="h-screen w-full flex flex-col bg-neutral-950 items-center justify-center px-6 md:px-12">
         <p className="text-neutral-400 dark:text-neutral-200 text-center text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed">
-          Upload your files, define a template, and let us do the rest—convert your
-          data into customized text or PDFs in no time!
+          Upload your files, define a template, and let us do the rest—convert
+          your data into customized text or PDFs in no time!
         </p>
 
         <TypewriterEffectSmooth words={words} />
 
         <div className="w-full sm:w-auto flex flex-col md:flex-row mt-6 space-y-4 md:space-y-0 md:space-x-4">
-          <button className="px-8 py-4  rounded-lg bg-blue-500 border dark:border-white border-transparent font-semibold text-white text-sm z-50">
-            <Link to="/home">
+          
+            <button className="px-8 py-4  rounded-lg bg-blue-500 border dark:border-white border-transparent font-semibold text-white text-sm z-50" onClick={() => navigate("/home")}>
               <p className="tracking-wider text-xl capitalize"> Try Now</p>
-            </Link>
-          </button>
-          <button className="px-8 py-4   rounded-lg font-semibold bg-white text-black border border-black text-sm z-50">
-            <Link to="/signup">
+            </button>
+            {" "}
+            <button className="px-8 py-4   rounded-lg font-semibold bg-white text-black border border-black text-sm z-50" onClick={() => navigate("/signup")}>
               <p className="  tracking-wider text-xl capitalize"> Sign up</p>
-            </Link>
-          </button>
+            </button>
         </div>
 
         <BackgroundBeams />
       </div>
     </div>
-
   )
 }
 
