@@ -13,8 +13,7 @@ const useLogout = () => {
       await logoutUser();
       toast.success('logged out successfully')
     } catch (error) {
-      console.error("Logout failed", error);
-      toast.error('something went wrong');
+      toast.error('something went wrong ');
     }finally{
       toast.dismiss(toastId);
     }

@@ -1,5 +1,4 @@
 import UploadedFileInfo from "./UploadedFileInfo"
-
 import { FaRegCircleCheck } from "react-icons/fa6"
 import useFileUploader from "../hooks/useFileUploader"
 import BackgroundGrid from "./BackgroundGrid"

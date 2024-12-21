@@ -12,7 +12,6 @@ const useSignin = () => {
 
   useEffect(() => {
     const isInitialLoad = !email && !password;
-    console.log('naviagte to home', user);
     if (user && isInitialLoad) {
       navigate('/home');
     }
