@@ -15,11 +15,9 @@ const GoogleButton: React.FC = () => {
         } catch (error: unknown) {
             console.error('Google login error:', error);
             if (error instanceof Error) {
-                toast.error(error.message || 'Failed to connect with Google');
-            } else {
-                toast.error('Failed to connect with Google');
+                // toast.error(error.message);
+                console.log(error.message);
             }
-
             if ((error as { type?: string }).type === 'general_unauthorized_scope') {
                 toast.error('Authentication configuration error. Please contact support.');
             }
