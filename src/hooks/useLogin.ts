@@ -4,8 +4,8 @@ import { useAuth } from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 const useSignin = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test@gmail.com');
+  const [password, setPassword] = useState('Test@123');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const { user, loginUser } = useAuth();
