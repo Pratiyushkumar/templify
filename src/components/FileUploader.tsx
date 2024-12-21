@@ -108,7 +108,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected }) => {
             </p>
           </div>
           <div className="text-gray-400 space-y-2 md:space-y-1">
-            <p className="text-sm md:text-[12px] md:text-sm">Maximum file size is 10 MB</p>
+            <p className="text-sm md:text-[12px] md:text-sm">Maximum file size is 2 MB</p>
             <p className="text-[12px] md:text-sm">Accepted file formats are:</p>
           </div>
   
