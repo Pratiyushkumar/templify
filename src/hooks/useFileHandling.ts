@@ -15,6 +15,7 @@ const useFileHandling = () => {
     setTemplate,
     processedData,
     setProcessedData,
+    setCustomTemplate
   } = useFileContext();
   const ALLOWED_FILE_EXTENSIONS = ['.xls', '.xlsx', '.csv'];
 
@@ -91,6 +92,7 @@ const useFileHandling = () => {
   };
 
   const handleResetData = () => {
+    setCustomTemplate('');
     setHeaders([]);
     setFile(null);
     setTableData([]);

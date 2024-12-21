@@ -9,6 +9,8 @@ interface FileContextProps {
   setTableData: (tableData: { [key: string]: string }[]) => void
   template: string
   setTemplate: (template: string) => void
+  customTemplate: string
+  setCustomTemplate: (template: string) => void
   processedData: string[]
   setProcessedData: (processedData: string[]) => void
 }
@@ -22,6 +24,8 @@ const FileContext = createContext<FileContextProps>({
   setTableData: () => {},
   template: "",
   setTemplate: () => {},
+  customTemplate: "",
+  setCustomTemplate: () => {},
   processedData: [],
   setProcessedData: () => {},
 })
@@ -31,6 +35,7 @@ const FileContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [headers, setHeaders] = useState<string[]>([])
   const [tableData, setTableData] = useState<{ [key: string]: string }[]>([])
   const [template, setTemplate] = useState<string>("")
+  const [customTemplate, setCustomTemplate] = useState<string>("")
   const [processedData, setProcessedData] = useState<string[]>([])
 
   const contextValues = {
@@ -43,7 +48,7 @@ const FileContextProvider = ({ children }: { children: React.ReactNode }) => {
     template,
     setTemplate,
     processedData,
-    setProcessedData,
+    setProcessedData,customTemplate, setCustomTemplate
   }
   return (
     <FileContext.Provider value={contextValues}>{children}</FileContext.Provider>
