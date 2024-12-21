@@ -35,6 +35,13 @@ const useFileUploader =  ({onFileSelected}: FileUploaderProps) => {
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0]
       if (file) {
+         if (file.size > 2 * 1024 * 1024) {
+           alert('File size exceeds 2MB. Please upload a smaller file.');
+           if (inputRef.current) {
+             inputRef.current.value = '';
+           }
+           return;
+         }
         const isValid = [".xls", ".xlsx", ".csv"].some((ext) =>
           file.name.toLowerCase().endsWith(ext),
         )
