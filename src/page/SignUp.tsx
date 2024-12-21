@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import useSignup from '../hooks/useSignup';
-import GoogleButton from '../components/GoogleButton';
+// import GoogleButton from '../components/GoogleButton';
 import Navbar from '../components/ui/navbar';
 
 const SignUp = () => {
@@ -10,7 +10,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-950">
-    <Navbar />
+      <Navbar />
       <div className="flex items-center justify-center px-4 pt-24">
         <div className="w-full max-w-md space-y-4 bg-gray-900/50 p-8 rounded-lg border border-gray-800">
           <div className="space-y-2 text-center">
@@ -85,10 +85,10 @@ const SignUp = () => {
               Sign in
             </button>
           </div>
-          <div className="relative flex justify-center capitalize text-base">
+          {/* <div className="relative flex justify-center capitalize text-base">
             <span className="bg-gray-900/50 px-2 text-gray-400">or</span>
           </div>
-          <GoogleButton />
+          <GoogleButton /> */}
         </div>
       </div>
     </div>

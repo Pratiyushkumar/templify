@@ -3,7 +3,7 @@ import Navbar from '../components/ui/navbar';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import useSignin from '../hooks/useLogin';
-import GoogleButton from '../components/GoogleButton';
+// import GoogleButton from '../components/GoogleButton';
 
 const SignIn = () => {
   const { handleSubmit, handleEmailChange, handlePasswordChange, email, password, emailError, passwordError } = useSignin();
@@ -54,10 +54,10 @@ const SignIn = () => {
               Sign up
             </Link>
           </div>
-          <div className="relative flex justify-center capitalize text-base">
+          {/* <div className="relative flex justify-center capitalize text-base">
             <span className="bg-gray-900/50 px-2 text-gray-400">or</span>
           </div>
-          <GoogleButton />
+          <GoogleButton /> */}
         </div>
       </div>
     </div>
