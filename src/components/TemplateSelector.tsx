@@ -21,10 +21,8 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   const getCursorCoordinates = (textareaElement: HTMLTextAreaElement) => {
     if (!textareaElement) return null;
 
-    // Get the current cursor position
     const cursorPosition = textareaElement.selectionStart;
 
-    // Create a temporary div to measure text
     const div = document.createElement('div');
     div.style.cssText = window.getComputedStyle(textareaElement).cssText;
     div.style.height = 'auto';
@@ -32,12 +30,10 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     div.style.visibility = 'hidden';
     div.style.whiteSpace = 'pre-wrap';
 
-    // Get text before cursor
     const textBeforeCursor = customTemplate.substring(0, cursorPosition);
     const textBeforeCursorLines = textBeforeCursor.split('\n');
     const currentLineText = textBeforeCursorLines[textBeforeCursorLines.length - 1];
 
-    // Calculate position
     const { lineHeight, paddingLeft, paddingTop } = window.getComputedStyle(textareaElement);
     const lineHeightValue = parseInt(lineHeight);
     const paddingLeftValue = parseInt(paddingLeft);
@@ -57,32 +53,21 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     };
   };
 
-  useEffect(() => {
-    // Debug log
-    console.log('Current template:', customTemplate);
-    console.log('Show suggestions:', showSuggestions);
-    console.log('Headers:', headers);
-  }, [customTemplate, showSuggestions, headers]);
-
   const handleCustomTemplateChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = event.target.value;
     setCustomTemplate(newValue);
 
-    // Check if the last character is '@'
     if (newValue.endsWith('@')) {
-      console.log('@ detected, showing suggestions');
       setShowSuggestions(true);
       setSuggestions(headers);
 
       if (textareaRef.current) {
         const position = getCursorCoordinates(textareaRef.current);
-        console.log('Cursor position:', position);
         if (position) {
           setCursorPosition(position);
         }
       }
     } else {
-      // Only hide suggestions if they're currently shown
       if (showSuggestions) {
         setShowSuggestions(false);
       }
@@ -91,7 +76,6 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 
   const handleSuggestionClick = (header: string) => {
     const cursorPosition = textareaRef.current?.selectionStart || 0;
-    // Remove the @ symbol and add the header
     const newTemplate =
       customTemplate.slice(0, cursorPosition) +
       header +
@@ -100,7 +84,6 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     setShowSuggestions(false);
   };
 
-  // Close suggestions when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (

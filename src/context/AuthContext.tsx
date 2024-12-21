@@ -45,12 +45,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const oauth2state = urlParams.get('oauth2state');
-
-        // if (oauth2state) {
         checkSession();
-        // }
     }, []);
 
     const checkSession = async () => {
@@ -64,11 +59,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
                     email: accountDetails.email,
                     password: accountDetails.password ?? '',
                 });
-
-                // // Check if we're on signin page after successful OAuth
-                // if (window.location.pathname === '/signin') {
-                //     window.location.href = '/home';
-                // }
             }
         } catch (error) {
             console.log('No active session', error);
@@ -80,7 +70,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const loginUser = async (userInfo: LoginCredentials): Promise<void> => {
         setLoading(true);
         try {
-            // First, try to delete any existing sessions
             try {
                 await account.deleteSessions();
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -88,7 +77,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
                 console.log('No existing sessions to delete');
             }
 
-            // Now create new session
             await account.createEmailPasswordSession(
                 userInfo.email,
                 userInfo.password
@@ -118,10 +106,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     const logoutUser = async (): Promise<void> => {
-        // Implement your logout logic here
         setLoading(true);
         try {
-            await account.deleteSession('current'); // Deletes the current session
+            await account.deleteSession('current');
             setUser(null);
         } catch (error) {
             console.error('Error logging out:', error);
@@ -171,7 +158,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
                 email: accountDetails.email,
                 password: accountDetails.password ?? '',
             });
-            console.log("response of google login", response);
         } catch (error) {
             console.error('Google login error:', error);
             throw new Error('Failed to login with Google');

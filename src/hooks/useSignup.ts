@@ -23,11 +23,10 @@ const useSignup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setErrorMessage("") // Clear any previous errors
+    setErrorMessage("")
 
     const { name, email, password, confirmPassword } = formData
 
-    // Client-side validation
     if (!name || !email || !password || !confirmPassword) {
       setErrorMessage("All fields are required")
       toast.error("All fields are required");
@@ -51,7 +50,7 @@ const useSignup = () => {
       await registerUser(name, email, password)
       navigate("/home")
       toast.success("Account create successfully");
-      // Registration successful - the AuthContext will handle the redirect/state update
+    
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message)
