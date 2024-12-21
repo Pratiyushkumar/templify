@@ -1,8 +1,23 @@
 # Templify ✨
+## 🔄 Table of Contents
 
-**A Cutting-Edge Platform to Automate and Simplify Document Creation**
+- [Templify ✨](#templify-)
+  - [🔄 Table of Contents](#-table-of-contents)
+  - [🕵️‍♂️ Problem Statement](#️️-problem-statement)
+  - [Motivation](#motivation)
+  - [🚀 Our Solution](#-our-solution)
+  - [🔗 Live URL](#-live-url)
+  - [📊 Features](#-features)
+  - [🔧 Technologies Used](#-technologies-used)
+  - [🌍 Future Scope](#-future-scope)
+  - [📃 Setup Guide](#-setup-guide)
+  - [🛠️ Contributing](#️-contributing)
 
-Templify revolutionizes the way documents are created. By allowing users to upload data files and dynamically reference fields, it eliminates the time-consuming and error-prone process of manual document creation. This innovative solution is perfect for anyone who needs to generate personalized PDFs or text files efficiently and accurately.
+---
+
+**A Platform to Automate and Simplify Template Creation**
+
+Templify revolutionizes the way templates are created. By allowing users to upload tabular data files and dynamically reference fields, it eliminates the time-consuming and error-prone process of manual document creation. This solution is perfect for anyone who needs to generate personalized PDFs or text files from tabular data efficiently and accurately.
 
 ---
 
@@ -14,11 +29,17 @@ Creating personalized PDFs manually is a tedious and time-consuming process. Use
 
 This repetitive process not only hampers productivity but also introduces a high likelihood of errors, especially when working with large datasets.
 
+## Motivation
+This idea came from a recent problem that we faced when we had to distribute swags to our fellow contributors  and we had to manually enter the details for each and every members from an excel file.
+
 ## 🚀 Our Solution
 
 **Templify** provides a seamless way to automate this process. It allows users to:
-- Upload a file containing user data in bulk.
+- Upload a file containing tabular user data.
 - Dynamically reference data fields using placeholders like `@user_name`.
+- Define their own template like `
+  Hi @user_name, this gift will be sent to you at @address 
+  `
 - Generate a preview of the final document within seconds.
 - Download the output in either PDF or text format for easy use.
 
@@ -30,18 +51,6 @@ With Templify, users can create professional documents effortlessly, saving time
 ## 🔗 Live URL
 
 Experience the power of Templify firsthand by visiting the live application here: [Templify on Vercel](https://templify-theta.vercel.app)
-
----
-
-## 🔄 Table of Contents
-
-- [Features](#-features)
-- [Technologies Used](#-technologies-used)
-- [Future Scope](#-future-scope)
-- [Project Structure](#-project-structure)
-- [Setup Guide](#-setup-guide)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
@@ -66,7 +75,7 @@ Experience the power of Templify firsthand by visiting the live application here
 - **React**: Frontend library for building the UI.
 - **Tailwind CSS**: For styling and responsiveness.
 - **Appwrite**: Backend for user authentication and database management.
-- **Acternity & Shadcn**: Additional tools for enhanced functionality and design consistency.
+- **Aceternity & Shadcn**: Additional tools for enhanced functionality and design consistency.
 
 ---
 
@@ -76,6 +85,10 @@ Experience the power of Templify firsthand by visiting the live application here
    - Allow users to upload multiple files and combine outputs.
 2. **Template History**
    - Save and reuse previous templates for quick recreation.
+3. **Designer Templates**
+   - User can choose between pre-built designer templates for PDFs
+4. **Share via email**
+   - User can share the PDFs via email directly from app.
 
 ---
 
@@ -91,7 +104,7 @@ Follow these steps to set up the project locally:
 
 2. **Install Dependencies**
    ```bash
-   npm install
+   pnpm install
    ```
 
 3. **Set Up Environment Variables**
@@ -103,12 +116,12 @@ Follow these steps to set up the project locally:
 
 4. **Start the Development Server**
    ```bash
-   npm start
+   pnpm dev
    ```
 
 5. **Build for Production**
    ```bash
-   npm run build
+   pnpm run build
    ```
 
 ---
