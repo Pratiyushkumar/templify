@@ -1,0 +1,6 @@
+echo "🔍 Running lint-staged checks..."
+pnpm lint-staged || {
+    echo "❌ Code quality checks failed. Please fix the errors and try again."
+    exit 1
+}
+echo "✅ Code quality checks passed!"
